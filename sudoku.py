@@ -8,7 +8,7 @@ def solve_sudoku(board):
             return None
         if not all(isinstance(x, int) and 0 <= x <= 9 for x in row):
             return None
-    
+
     # Check if initial board is valid
     def is_valid(y, x, n):
         for i in range(9):
@@ -20,7 +20,7 @@ def solve_sudoku(board):
                 if board[box_y + i][box_x + j] == n:
                     return False
         return True
-    
+
     def is_initial_board_valid():
         # Check rows
         for row in board:
@@ -46,10 +46,10 @@ def solve_sudoku(board):
                 if len(nums) != len(set(nums)):
                     return False
         return True
-    
+
     if not is_initial_board_valid():
         return None
-    
+
     def solve():
         for y in range(9):
             for x in range(9):
@@ -62,7 +62,7 @@ def solve_sudoku(board):
                             board[y][x] = 0
                     return False
         return True
-    
+
     # Create a copy of the board to avoid modifying the input
     board = [row[:] for row in board]
     

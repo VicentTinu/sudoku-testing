@@ -61,7 +61,67 @@ class TestSudokuSolver(unittest.TestCase):
         solution = solve_sudoku(initial_board)
         self.assertEqual(solution, expected_solution)
 
-    # [... rest of the test cases as shown in previous message ...]
+    def test_medium_puzzle(self):
+        initial_board = [
+            [0, 0, 0, 6, 0, 0, 4, 0, 0],
+            [7, 0, 0, 0, 0, 3, 6, 0, 0],
+            [0, 0, 0, 0, 9, 1, 0, 8, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 5, 0, 1, 8, 0, 0, 0, 3],
+            [0, 0, 0, 3, 0, 6, 0, 4, 5],
+            [0, 4, 0, 2, 0, 0, 0, 6, 0],
+            [9, 0, 3, 0, 0, 0, 0, 0, 0],
+            [0, 2, 0, 0, 0, 0, 1, 0, 0]
+        ]
+        
+        solution = solve_sudoku(initial_board)
+        self.assertIsNotNone(solution)
+        # Verify basic Sudoku rules
+        for row in solution:
+            self.assertEqual(sorted(row), list(range(1, 10)))
+
+    def test_hard_puzzle(self):
+        initial_board = [
+            [0, 2, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 6, 0, 0, 0, 0, 3],
+            [0, 7, 4, 0, 8, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 3, 0, 0, 2],
+            [0, 8, 0, 0, 4, 0, 0, 1, 0],
+            [6, 0, 0, 5, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 7, 8, 0],
+            [5, 0, 0, 0, 0, 9, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 4, 0]
+        ]
+        
+        solution = solve_sudoku(initial_board)
+        self.assertIsNotNone(solution)
+        # Verify basic Sudoku rules
+        for row in solution:
+            self.assertEqual(sorted(row), list(range(1, 10)))
+
+    def test_invalid_input_wrong_size(self):
+        # Test with wrong number of rows
+        invalid_board = [
+            [5, 3, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0]
+        ]
+        self.assertIsNone(solve_sudoku(invalid_board))
+
+    def test_invalid_input_duplicate_numbers(self):
+        # Test with duplicate numbers in a row
+        invalid_board = [
+            [5, 5, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0],
+            [8, 0, 0, 0, 6, 0, 0, 0, 3],
+            [4, 0, 0, 8, 0, 3, 0, 0, 1],
+            [7, 0, 0, 0, 2, 0, 0, 0, 6],
+            [0, 6, 0, 0, 0, 0, 2, 8, 0],
+            [0, 0, 0, 4, 1, 9, 0, 0, 5],
+            [0, 0, 0, 0, 8, 0, 0, 7, 9]
+        ]
+        self.assertIsNone(solve_sudoku(invalid_board))
 
 if __name__ == '__main__':
     unittest.main()
